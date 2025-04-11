@@ -1,25 +1,29 @@
 'use client';
 
-import { Button, Callout, TextField } from '@radix-ui/themes';
+import { createBugSchema } from '@/app/api/bugs/createBugSchema';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { Button, Callout, Text, TextField } from '@radix-ui/themes';
 import axios from 'axios';
 import 'easymde/dist/easymde.min.css';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import SimpleMDE from 'react-simplemde-editor';
+import { z } from 'zod';
 
-
-interface BugForm {
-    title: string,
-    description: string
-}
+type NewBugForm = z.infer<typeof createBugSchema>;
 
 const NewBugPage = () => {
 
     const router = useRouter();
-    const { register, control, handleSubmit } = useForm<BugForm>();
 
-    const [error, setError] = useState('')
+    const { register, control, handleSubmit, formState: { errors } } = useForm<NewBugForm>({
+        resolver: zodResolver(createBugSchema)
+    });
+
+    const [error, setError] = useState('');
+
+
     return (
         <div className="max-w-xl">
             {error && <Callout.Root color="red" className='mb-5'>
@@ -33,7 +37,9 @@ const NewBugPage = () => {
                     setError('An unexpected error occured');
                 }
             })}>
+                {errors.title && <Text color="red">{errors.title.message}</Text>}
                 <TextField.Root placeholder="Title" {...register('title')} />
+                {errors.description && <Text color="red">{errors.description.message}</Text>}
                 <Controller name="description" control={control} render={({ field }) => <SimpleMDE placeholder='Description' {...field}></SimpleMDE>}></Controller>
                 <Button>Submit New Bug</Button>
             </form>
