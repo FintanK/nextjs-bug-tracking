@@ -2,8 +2,6 @@
 
 A bug tracking application built with Next.js, Tailwind, Radix UI, Prisma and MySQL.
 
-A backup of the the MySQL schema can be found in
-
 ## Dependencies
 
 - Tailwind - https://tailwindcss.com/
