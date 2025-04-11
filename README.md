@@ -1,3 +1,15 @@
+# NextJS Bug Tracking
+
+A bug tracking application built with Next.js, Tailwind, Radix UI, Prisma and MySQL.
+
+A backup of the the MySQL schema can be found in
+
+## Dependencies
+
+- Tailwind
+- Radix UI (component library ) - https://www.radix-ui.com/
+- Prisma
+
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
 ## Getting Started
