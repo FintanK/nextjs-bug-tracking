@@ -1,6 +1,7 @@
 'use client';
 
 import { createBugSchema } from '@/app/api/bugs/createBugSchema';
+import Spinner from '@/app/components/Spinner';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Button, Callout, Text, TextField } from '@radix-ui/themes';
 import axios from 'axios';
@@ -22,26 +23,30 @@ const NewBugPage = () => {
     });
 
     const [error, setError] = useState('');
+    const [isSubmitting, setIsSubmitting] = useState(false);
 
+    const onSubmit = handleSubmit(async (data) => {
+        try {
+            setIsSubmitting(true);
+            await axios.post('/api/bugs', data);
+            router.push('/bugs');
+        } catch (error) {
+            setIsSubmitting(false);
+            setError('An unexpected error occured');
+        }
+    });
 
     return (
         <div className="max-w-xl">
             {error && <Callout.Root color="red" className='mb-5'>
                 <Callout.Text>{error}</Callout.Text>
             </Callout.Root>}
-            <form className="space-y-3" onSubmit={handleSubmit(async (data) => {
-                try {
-                    await axios.post('/api/bugs', data);
-                    router.push('/bugs');
-                } catch (error) {
-                    setError('An unexpected error occured');
-                }
-            })}>
+            <form className="space-y-3" onSubmit={onSubmit}>
                 {errors.title && <Text color="red">{errors.title.message}</Text>}
                 <TextField.Root placeholder="Title" {...register('title')} />
                 {errors.description && <Text color="red">{errors.description.message}</Text>}
                 <Controller name="description" control={control} render={({ field }) => <SimpleMDE placeholder='Description' {...field}></SimpleMDE>}></Controller>
-                <Button>Submit New Bug</Button>
+                <Button disabled={isSubmitting}>Submit New Bug{isSubmitting && <Spinner />}</Button>
             </form>
         </div>
     )

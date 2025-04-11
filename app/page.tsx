@@ -7,6 +7,8 @@ export default function Home() {
   return (
     <div>
       <Link href='/bugs/new'>
+        <h1>Welcome.</h1>
+        <p>Have an issue / bug in your project? Get started.</p>
         <Button>
           <IoIosAdd /> New Bug
         </Button>
