@@ -6,9 +6,9 @@ A backup of the the MySQL schema can be found in
 
 ## Dependencies
 
-- Tailwind
-- Radix UI (component library ) - https://www.radix-ui.com/
-- Prisma
+- Tailwind - https://tailwindcss.com/
+- Radix UI (component library) - https://www.radix-ui.com/
+- Prisma (ORM for React server components) - https://www.prisma.io/react-server-components
 
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
