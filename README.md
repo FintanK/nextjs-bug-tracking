@@ -10,6 +10,10 @@ A bug tracking application built with Next.js, Tailwind, Radix UI, Prisma and My
 
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
+This project uses a MySQL database which can be generated with Prisma.
+
+An example .env file is provided.
+
 ## Getting Started
 
 First, run the development server:
